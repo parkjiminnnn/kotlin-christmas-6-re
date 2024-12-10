@@ -1,14 +1,14 @@
 package christmas.domain
 
-class Calculator(private val discount: Discount, private val consumer: Consumer) {
+class Calculator(private val discount: Discount) {
     fun beforeDiscountAmount(): Int {
-        val matchingMenuPrice = consumer.getMatchingMenuPrice()
+        val matchingMenuPrice = discount.consumer.getMatchingMenuPrice()
         return matchingMenuPrice.sumOf { it[0] * it[1] }
     }
 
     fun totalDiscount(): Int {
         return discount.christmasDiscount() + discount.weekdayDiscount() +
-                discount.specialDiscount() + discount.weekendDisCount()
+                discount.specialDiscount() + discount.weekendDisCount() + freeEvent()
     }
 
     fun afterDiscountAmount(): Int {
