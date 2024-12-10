@@ -1,11 +1,12 @@
 package christmas.domain
 
+import christmas.utils.ErrorHandler.handleQuantity
 import christmas.utils.MenuBoard
 
 class Consumer(private val rawMenus: String) {
-    private fun getMenus(): List<Pair<String, Int>> {
+    fun getMenus(): List<Pair<String, Int>> {
         val menus = rawMenus.split(',')
-        return menus.map { Pair(it.split("-")[0], it.split("-")[1].toInt()) }
+        return menus.map { Pair(it.split("-")[0], handleQuantity(it.split("-")[1])) }
     }
 
     fun getMatchingMenuPrice(): List<List<Int>> {
@@ -20,7 +21,14 @@ class Consumer(private val rawMenus: String) {
         return matchingMenuPrices
     }
 
-    fun getMenuTypes() {
-
+    fun getMenuTypes(): List<Pair<String, Int>> {
+        val menus = getMenus()
+        val menuTypes = mutableListOf<Pair<String, Int>>()
+        menus.forEach {
+            for (i in MenuBoard.entries) {
+                if (it.first == i.menuName) menuTypes.add(Pair(i.menuType, it.second))
+            }
+        }
+        return menuTypes
     }
 }
