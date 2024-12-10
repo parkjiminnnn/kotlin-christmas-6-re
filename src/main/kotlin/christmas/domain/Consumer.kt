@@ -11,24 +11,15 @@ class Consumer(private val rawMenus: String) {
 
     fun getMatchingMenuPrice(): List<List<Int>> {
         val menus = getMenus()
-        val matchingMenuPrices = mutableListOf<List<Int>>()
-        menus.forEach { menu ->
-            for (i in MenuBoard.entries) {
-                if (i.menuName == menu.first)
-                    matchingMenuPrices.add(listOf(menu.second, i.menuPrice))
-            }
+        return menus.map { menu ->
+            MenuBoard.entries.find { it.menuName == menu.first }?.let { listOf(menu.second, it.menuPrice) }!!
         }
-        return matchingMenuPrices
     }
 
     fun getMenuTypes(): List<Pair<String, Int>> {
         val menus = getMenus()
-        val menuTypes = mutableListOf<Pair<String, Int>>()
-        menus.forEach {
-            for (i in MenuBoard.entries) {
-                if (it.first == i.menuName) menuTypes.add(Pair(i.menuType, it.second))
-            }
+        return menus.map { menu ->
+            MenuBoard.entries.find { it.menuName == menu.first }?.let { Pair(it.menuType, menu.second) }!!
         }
-        return menuTypes
     }
 }
