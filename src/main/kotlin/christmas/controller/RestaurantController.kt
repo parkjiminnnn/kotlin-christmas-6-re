@@ -4,6 +4,7 @@ import christmas.domain.Calculator
 import christmas.domain.Calendar
 import christmas.domain.Consumer
 import christmas.domain.Discount
+import christmas.utils.ErrorHandler.handleDrink
 import christmas.utils.ErrorHandler.handleMenus
 import christmas.utils.ErrorHandler.handleReserveDay
 import christmas.view.InputView.inputMenusMessage
@@ -56,9 +57,9 @@ class RestaurantController {
     private fun validMenus(): Consumer {
         while (true) {
             try {
-                val rawMenus = inputMenusMessage()
-                val consumer = Consumer(rawMenus)
+                val consumer = Consumer(inputMenusMessage())
                 handleMenus(consumer.getMenus())
+                handleDrink(consumer.getMenuTypes())
                 return consumer
             } catch (e: IllegalArgumentException) {
                 println(e)
