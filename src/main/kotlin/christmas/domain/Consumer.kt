@@ -1,7 +1,6 @@
 package christmas.domain
 
 import christmas.utils.ErrorHandler.handleQuantity
-import christmas.utils.MenuBoard
 
 class Consumer(private val rawMenus: String) {
     fun getMenus(): List<Pair<String, Int>> {

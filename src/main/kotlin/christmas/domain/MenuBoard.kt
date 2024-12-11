@@ -1,4 +1,4 @@
-package christmas.utils
+package christmas.domain
 
 enum class MenuBoard(val menuName: String, val menuType: String, val menuPrice: Int) {
     MUSHROONSOUP("양송이수프", "애피타이저", 6000),

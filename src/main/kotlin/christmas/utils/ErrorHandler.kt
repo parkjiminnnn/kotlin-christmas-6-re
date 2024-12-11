@@ -1,5 +1,7 @@
 package christmas.utils
 
+import christmas.domain.MenuBoard
+
 object ErrorHandler {
     fun handleReserveDay(rawReserveDay: String): Int {
         val reserveDay = rawReserveDay.toIntOrNull()
